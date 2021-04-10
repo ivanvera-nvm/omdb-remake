@@ -1,11 +1,6 @@
 import React from "react";
 
 import { Layout, Menu, Breadcrumb } from "antd";
-import {
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-} from "@ant-design/icons";
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -15,6 +10,7 @@ const Appbar = () => {
 
   return (
     <div>
+        
       <Header
         className="header"
         style={{
@@ -26,6 +22,7 @@ const Appbar = () => {
           padding: 0,
         }}
       >
+          
         <Menu
           mode="horizontal"
           style={{
@@ -41,6 +38,7 @@ const Appbar = () => {
             <Menu.Item key={i}>{e}</Menu.Item>
           ))}
         </Menu>
+        
       </Header>
     </div>
   );

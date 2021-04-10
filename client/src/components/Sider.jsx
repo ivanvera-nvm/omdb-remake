@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { Layout, Menu, Breadcrumb } from "antd";
-import {
-  DesktopOutlined,
-  PieChartOutlined,
-  StarOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { Layout, Menu } from "antd";
+import { StarOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
 
-const { Header, Content, Footer, Sider } = Layout;
+import Copyright from './Copyright';
+
+const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
 const SidePanel = () => {
@@ -46,7 +42,7 @@ const SidePanel = () => {
         width="200"
       >
         <Menu
-          /* theme="dark" */ mode="inline"
+          mode="inline"
           style={{
             borderColor: "silver",
             paddingTop: 110,
@@ -54,7 +50,7 @@ const SidePanel = () => {
             height: "100vh",
           }}
         >
-          <SubMenu key="sub1" icon={<UserOutlined />} title="User" >
+          <SubMenu key="sub1" icon={<UserOutlined />} title="User">
             <Menu.Item key="1">Profile</Menu.Item>
             <Menu.Item key="2">Favorites</Menu.Item>
             <Menu.Item key="3" danger>
@@ -71,6 +67,22 @@ const SidePanel = () => {
           </Menu.Item>
         </Menu>
       </Sider>
+
+      <Layout>
+        <Header
+          className="site-layout-sub-header-background"
+          style={{ padding: 0 }}
+        />
+        <Content style={{ margin: "24px 16px 0" }}>
+          <div
+            className="site-layout-background"
+            style={{ padding: 24, minHeight: 360 }}
+          >
+            content
+          </div>
+        </Content>
+      <Copyright/>
+      </Layout>
     </Layout>
   );
 };
