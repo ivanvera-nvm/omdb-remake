@@ -1,6 +1,6 @@
 # OMDB Remake
 
-In process
+In progress
 ## Item 1
 ### Item 2
 
