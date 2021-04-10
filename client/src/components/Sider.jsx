@@ -3,7 +3,8 @@ import React from "react";
 import { Layout, Menu } from "antd";
 import { StarOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
 
-import Copyright from './Copyright';
+import Grid from "../components/Grid";
+import Copyright from "./Copyright";
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -32,9 +33,8 @@ const SidePanel = () => {
         }}
         style={{
           display: "flex",
-          alignSelf: "center",
           overflow: "auto",
-          height: "100vh",
+          height: "200vh",
           position: "relative",
           left: 0,
           backgroundColor: "#141414",
@@ -47,7 +47,7 @@ const SidePanel = () => {
             borderColor: "silver",
             paddingTop: 110,
             position: "absolute",
-            height: "100vh",
+            height: "200vh",
           }}
         >
           <SubMenu key="sub1" icon={<UserOutlined />} title="User">
@@ -68,7 +68,7 @@ const SidePanel = () => {
         </Menu>
       </Sider>
 
-      <Layout>
+      <Layout style={{paddingLeft: 10}}>
         <Header
           className="site-layout-sub-header-background"
           style={{ padding: 0 }}
@@ -76,12 +76,15 @@ const SidePanel = () => {
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             className="site-layout-background"
-            style={{ padding: 24, minHeight: 360 }}
+            style={{
+              padding: 24,
+              minHeight: 360,
+            }}
           >
-            content
+            <Grid />
           </div>
         </Content>
-      <Copyright/>
+        <Copyright />
       </Layout>
     </Layout>
   );
