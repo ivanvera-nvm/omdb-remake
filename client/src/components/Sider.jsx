@@ -7,6 +7,8 @@ import Grid from "../components/Grid";
 import Copyright from "./Copyright";
 
 import {Link} from 'react-router-dom'
+import {clearUser} from '../state/users'
+import {useDispatch, useSelector} from 'react-redux'
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -21,6 +23,18 @@ const SidePanel = () => {
     "Mystery",
     "Romance",
   ];
+const dispatch = useDispatch()
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    dispatch(clearUser())
+   alert('logout!')
+  };
+    
+  const user = useSelector(state => state.user)
+
+
+  console.log('ACtual user =======>' ,user)
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -36,7 +50,7 @@ const SidePanel = () => {
         style={{
           display: "flex",
           overflow: "auto",
-          height: "200vh",
+          height: "360vh",
           position: "relative",
           left: 0,
           backgroundColor: "#141414",
@@ -49,13 +63,13 @@ const SidePanel = () => {
             borderColor: "silver",
             paddingTop: 110,
             position: "absolute",
-            height: "200vh",
+            height: "360vh",
           }}
         >
           <SubMenu key="sub1" icon={<UserOutlined />} title="User">
             <Menu.Item key="1"><Link to='/user/profile'/>Profile</Menu.Item>
             <Menu.Item key="2">Favorites</Menu.Item>
-            <Menu.Item key="3" danger>
+            <Menu.Item key="3" danger onClick={logout}>
               Logout
             </Menu.Item>
           </SubMenu>

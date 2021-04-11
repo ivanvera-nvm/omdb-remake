@@ -85,7 +85,7 @@ const userReducer = createReducer(initialState, {
     return { ...state, user: action.payload };
   },
   [clearUser]: (state, action) => {
-    return {};
+    return { ...state, user: {} };
   },
 });
 

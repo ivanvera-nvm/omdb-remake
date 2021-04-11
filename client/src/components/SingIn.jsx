@@ -3,18 +3,16 @@ import { Modal, Button, Input, Form, Layout } from "antd";
 
 import validateMessages from "../utils/validateMsgAntd";
 
-import {loginRequest} from '../state/users';
-import {useDispatch} from 'react-redux';
+import { fetchMe, loginRequest } from "../state/users";
+import { useDispatch } from "react-redux";
 
 const SingIn = () => {
-
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
 
   const onFinish = (values) => {
-    console.log(values);
-    dispatch(loginRequest(values))
-};
+    dispatch(loginRequest(values)).then((res) => dispatch(fetchMe()));
+  };
 
   const layout = {
     labelCol: {
