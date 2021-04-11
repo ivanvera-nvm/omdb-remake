@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Layout, Menu, Breadcrumb } from "antd";
+import {Link} from 'react-router-dom'
 import SignIn from "./SingIn";
 import SignUp from "./SignUp";
 
@@ -34,7 +35,7 @@ const Appbar = () => {
           }}
         >
           <Menu.Item key="1" ><SignIn/></Menu.Item>
-          <Menu.Item key="2">Home</Menu.Item>
+          <Menu.Item key="2"><Link to='/' />Home</Menu.Item>
           <Menu.Item key="3"><SignUp/></Menu.Item>
         </Menu>
       </Header>

@@ -10,6 +10,8 @@ import {Link} from 'react-router-dom'
 import {clearUser} from '../state/users'
 import {useDispatch, useSelector} from 'react-redux'
 
+import Profile from '../components/Profile'
+
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -66,9 +68,12 @@ const dispatch = useDispatch()
             height: "360vh",
           }}
         >
-          <SubMenu key="sub1" icon={<UserOutlined />} title="User">
-            <Menu.Item key="1"><Link to='/user/profile'/>Profile</Menu.Item>
-            <Menu.Item key="2">Favorites</Menu.Item>
+          <SubMenu key="sub1" icon={<UserOutlined />} title="User"
+        
+          >
+          
+            <Profile/>
+            <Menu.Item key="2"> Favorites</Menu.Item>
             <Menu.Item key="3" danger onClick={logout}>
               Logout
             </Menu.Item>
