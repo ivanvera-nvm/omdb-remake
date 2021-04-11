@@ -1,16 +1,17 @@
 const express = require("express");
 const router = express.Router();
-
+const register = require('../controllers/signup')
+const userController = require('../controllers/user')
 const { User, Fav } = require("../models");
 
-router.get("/");
+router.get("/", userController.allUsers);
 
-router.get("/:id");
+router.get("/:id", userController.findUser);
 
-router.post("/:id/favs");
+router.post("/:id/favs", userController.findOrCreateFav);
 
-router.delete("/:id/favs");
 
-router.post("/register");
+
+router.post("/register", register.registerUser);
 
 module.exports = router;
