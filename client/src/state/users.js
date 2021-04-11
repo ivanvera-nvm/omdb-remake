@@ -5,47 +5,61 @@ import {
 } from "@reduxjs/toolkit";
 
 import axios from "axios";
+import clientConfig from "../utils/client.config";
 
 export const clearUser = createAction("CLEAR_USER");
 
-export const registerRequest = createAsyncThunk("REGISTER_REQUEST", (input) => {
-  return axios
-    .post("http://localhost:8000/api/register", input)
-    .then((res) => res.data)
-    .then((user) => user)
-    .catch((e) => console.log(e));
-});
+export const registerRequest = createAsyncThunk(
+  "REGISTER_REQUEST",
+  async (input) => {
+    try {
+      const res = await axios.post(
+        `http://localhost:${clientConfig.port}/api/register`,
+        input
+      );
+      const user = res.data;
+      return user;
+    } catch (e) {
+      return console.log(e);
+    }
+  }
+);
 
-export const fetchMe = createAsyncThunk("FETCH_ME", () => {
+export const fetchMe = createAsyncThunk("FETCH_ME", async () => {
   const loginToken = JSON.parse(localStorage.getItem("token"));
-  return axios
-    .get(`http://localhost:8000/api/me`, {
+  try {
+    const r = await axios.get(`http://localhost:${clientConfig.port}/api/me`, {
       headers: { Authorization: `Bearer ${loginToken}` },
-    })
-    .then((r) => {
-      return r.data;
-    })
-    .catch((err) => console.log(err));
+    });
+    return r.data;
+  } catch (err) {
+    return console.log(err);
+  }
 });
 
-export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (input) => {
-  return axios
-    .post("http://localhost:8000/api/login", input)
-    .then((res) => {
-      localStorage.setItem("token", JSON.stringify(res.data.token));
-    })
-    .catch((err) => console.log(err));
+export const loginRequest = createAsyncThunk("LOGIN_REQUEST", async (input) => {
+  try {
+    const res = await axios.post(
+      `http://localhost:${clientConfig.port}/api/login`,
+      input
+    );
+    localStorage.setItem("token", JSON.stringify(res.data.token));
+  } catch (err) {
+    return console.log(err);
+  }
 });
 
-export const sendToken = createAsyncThunk("LOGIN", (token) => {
-  return axios
-    .post(
-      "http://localhost:5000/api/me",
+export const sendToken = createAsyncThunk("LOGIN", async (token) => {
+  try {
+    const res = await axios.post(
+      `http://localhost:/${clientConfig.port}/me`,
       {},
       { headers: { Authorization: `Bearer ${token}` } }
-    )
-    .then((res) => res.data)
-    .catch((err) => console.log(err));
+    );
+    return res.data;
+  } catch (err) {
+    return console.log(err);
+  }
 });
 
 export const userReducer = createReducer([], {

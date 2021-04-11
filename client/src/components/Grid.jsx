@@ -3,38 +3,55 @@ import React from "react";
 import { Row, Col, Divider } from "antd";
 import { Card } from "antd";
 
+import { useDispatch, useSelector } from "react-redux";
+
 const { Meta } = Card;
 
-const movies = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
 
 const Grid = () => {
+
+  const dispatch = useDispatch;
+  const movies = useSelector((state) => state.movies.movies);
+
+
   return (
     <div>
       <Divider orientation="left">Top</Divider>
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-        {movies.map((movie, i) => (
+        {movies.Search && movies.Search.map((movie, i) => (
           <Col
             xs={24}
             xl={8}
             sm={12}
             lg={32}
+            
             id={i}
-            style={{ display: "flex", justifyContent: "space-around" }}
+            style={{ display: "flex", justifyContent: "space-between" }}
+            itemID={i}
           >
-            <Card
-              title="Movie Name"
+            <Card id={i}
+              title={movie.Title}
               hoverable
-              style={{ width: 260, position: "relative", marginTop: 50 }}
+              style={{ width: 320, position: "relative", marginTop: 50, padding: "auto",}}
               cover={
                 <img
                   alt="example"
-                  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                  src={movie.Poster}
+                  style={{
+                    width: 320,
+                    height: 490,
+                    margin: "auto",
+                    padding: "auto",
+                    borderRadius: 5,
+                    border: "3px opacity black",
+                  }}
                 />
               }
             >
-              <Meta
-                title="Europe Street beat"
-                description="www.instagram.com"
+              <Meta 
+                title='Add to favorites'
+                description={movie.Year}
               />
             </Card>
           </Col>

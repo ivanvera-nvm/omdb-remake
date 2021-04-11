@@ -25,12 +25,12 @@ const SidePanel = () => {
       <Sider
         collapsible
         breakpoint="lg"
-        onBreakpoint={(broken) => {
+      /*   onBreakpoint={(broken) => {
           console.log(broken);
         }}
         onCollapse={(collapsed, type) => {
           console.log(collapsed, type);
-        }}
+        }} */
         style={{
           display: "flex",
           overflow: "auto",
