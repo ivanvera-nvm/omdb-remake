@@ -1,16 +1,16 @@
 import React from "react";
 
 import { Layout, Menu, Breadcrumb } from "antd";
+import SignIn from "./SingIn";
+import SignUp from "./SignUp";
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 
 const Appbar = () => {
-  const temp = ["Sign Up", "Home", "Sign In"];
 
   return (
     <div>
-        
       <Header
         className="header"
         style={{
@@ -22,7 +22,6 @@ const Appbar = () => {
           padding: 0,
         }}
       >
-          
         <Menu
           mode="horizontal"
           style={{
@@ -34,11 +33,10 @@ const Appbar = () => {
             borderRadius: 20,
           }}
         >
-          {temp.map((e, i) => (
-            <Menu.Item key={i}>{e}</Menu.Item>
-          ))}
+          <Menu.Item key="1" ><SignIn/></Menu.Item>
+          <Menu.Item key="2">Home</Menu.Item>
+          <Menu.Item key="3"><SignUp/></Menu.Item>
         </Menu>
-        
       </Header>
     </div>
   );

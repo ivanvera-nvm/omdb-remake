@@ -1,12 +1,7 @@
-const dotenv = require("dotenv").config();
-
-/* 
-PORT = 3000
- */
 
 module.exports = {
-/*     port: process.env.PORT, */
-    apiKey: process.env.APY_KEY,
+    port: 8000,
+    apiKey: "20dac387",
     detail: process.env.TEST_DETAIL,
     simple: process.env.TEST_SIMPLE,
   };

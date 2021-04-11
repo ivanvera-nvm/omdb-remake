@@ -3,8 +3,7 @@ const app = express();
 const db = require("./db");
 const cors = require("cors");
 const config = require("./server.config.js");
-const routes = require("./routes");
-
+const routes = require("./routes/index");
 
 app.use(
   cors({

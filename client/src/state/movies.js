@@ -1,18 +1,22 @@
 import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 
 import axios from "axios";
+import clientConfig from "../utils/client.config";
 
-export const findMovies = createAsyncThunk("FIND_MOVIES", (movie = 'avengers') => {
-  return axios
-    .get(`https://www.omdbapi.com/?apikey=20dac387&s=${movie}`)
-    .then((res) => res.data)
-    .catch((e) => e);
+export const findMovies = createAsyncThunk("FIND_MOVIES", async (movie = 'avengers') => {
+  try {
+    const res = await axios
+      .get(`https://www.omdbapi.com/?apikey=${clientConfig.apiKey}&s=${movie}`);
+    return res.data;
+  } catch (e) {
+    return e;
+  }
 });
 
 export const movieDetail = createAsyncThunk("MOVIE_DETAIL", async (movie) => {
   try {
     const res = axios.get(
-      `https://www.omdbapi.com/?apikey=${process.env.APY_KEY}&t=${movie}`
+      `https://www.omdbapi.com/?apikey=${clientConfig.apiKey}&t=${movie}`
     );
     return res;
   } catch (e) {

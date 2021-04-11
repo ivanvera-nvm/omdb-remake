@@ -27,4 +27,9 @@ User.beforeCreate(async (user) => {
   user.password = hash;
 });
 
+User.prototype.validPassword = function (loginPassword) {
+  const salt = this.salt;
+  return bcrypt.hash(loginPassword, this.salt);
+};
+
 module.exports = User;

@@ -6,8 +6,7 @@ const userController = {
       const users = await User.findAll();
       res.send(users);
     } catch (err) {
-      console.log(err);
-      res.send(err);
+      res.sendStatus(500).send(err);
     }
   },
 

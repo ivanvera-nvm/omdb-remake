@@ -6,6 +6,8 @@ import { StarOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
 import Grid from "../components/Grid";
 import Copyright from "./Copyright";
 
+import {Link} from 'react-router-dom'
+
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -51,7 +53,7 @@ const SidePanel = () => {
           }}
         >
           <SubMenu key="sub1" icon={<UserOutlined />} title="User">
-            <Menu.Item key="1">Profile</Menu.Item>
+            <Menu.Item key="1"><Link to='/user/profile'/>Profile</Menu.Item>
             <Menu.Item key="2">Favorites</Menu.Item>
             <Menu.Item key="3" danger>
               Logout

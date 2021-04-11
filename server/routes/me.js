@@ -1,7 +1,8 @@
 const express = require("express");
+const authController = require("../controllers/auth");
 const router = express.Router();
-const auth = require("../controllers/auth");
-const tokenMiddleware = require("./tokenMiddleware");
-const { User, Cadeteria } = require("../models/index");
+const tokenMiddleware = require("../middleware/tokenMiddleware");
 
-router.get("/", tokenMiddleware, auth.authorized);
+router.get("/", tokenMiddleware, authController.authorized);
+
+module.exports = router;

@@ -1,6 +1,9 @@
+const { User } = require("../models/");
+
 const authController = {
   authorized: async (req, res, next) => {
     const email = req.user.email;
+    console.log(email);
     try {
       const user = await User.findOne({ where: { email } });
       user
