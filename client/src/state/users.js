@@ -5,7 +5,8 @@ import {
 } from "@reduxjs/toolkit";
 
 import axios from "axios";
-import clientConfig from "../utils/client.config";
+import config from "../utils/config";
+
 
 export const clearUser = createAction("CLEAR_USER");
 
@@ -14,7 +15,7 @@ export const registerRequest = createAsyncThunk(
   async ({ user }) => {
     try {
       await axios.post(
-        `http://localhost:${clientConfig.port}/api/user/register`,
+        `http://localhost:${config.port}/api/user/register`,
         user
       );
     } catch (err) {
@@ -28,7 +29,7 @@ export const loginRequest = createAsyncThunk(
   async ({ user }) => {
     try {
       const res = await axios.post(
-        `http://localhost:${clientConfig.port}/api/user/login`,
+        `http://localhost:${config.port}/api/user/login`,
         user
       );
       localStorage.setItem("token", JSON.stringify(res.data.token));
@@ -42,7 +43,7 @@ export const fetchMe = createAsyncThunk("FETCH_ME", async () => {
   const loginToken = JSON.parse(localStorage.getItem("token"));
   try {
     const res = await axios.get(
-      `http://localhost:${clientConfig.port}/api/me`,
+      `http://localhost:${config.port}/api/me`,
       {
         headers: { Authorization: `Bearer ${loginToken}` },
       }
@@ -56,7 +57,7 @@ export const fetchMe = createAsyncThunk("FETCH_ME", async () => {
 export const sendToken = createAsyncThunk("LOGIN", async (token) => {
   try {
     const res = await axios.post(
-      `http://localhost:/8000/api/me`,
+      `http://localhost:/${config.port}/api/me`,
       {},
       { headers: { Authorization: `Bearer ${token}` } }
     );
