@@ -24,7 +24,9 @@ const { Title } = Typography;
 
 const Profile = ({ bool }) => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user).user;
+
+  console.log("User ====>", user);
 
   const [state, setState] = useState({ visible: false, placement: "left" });
 
@@ -42,7 +44,7 @@ const Profile = ({ bool }) => {
 
   const removeFav = (imdbID) => {
     axios
-      .delete(`http://localhost:3080/api/users/${user.id}/favs`, {
+      .delete(`http://localhost:8000/api/users/${user.id}/favs`, {
         data: { imdbID },
       })
       .then((res) => {
@@ -55,11 +57,28 @@ const Profile = ({ bool }) => {
       .catch((err) => message.error(err));
   };
 
+  const DescriptionItem = ({ title, content }) => (
+    <div className="site-description-item-profile-wrapper">
+      <p className="site-description-item-profile-p-label">{title}:</p>
+      {content}
+    </div>
+  );
+
   const { placement, visible } = state;
 
   return (
     <>
-       <Button onClick={showDrawer} style={{borderColor: '#1d1d1d', marginLeft: 34, marginTop: 15, marginBottom: 2}}>Profile</Button>
+      <Button
+        onClick={showDrawer}
+        style={{
+          borderColor: "#1d1d1d",
+          marginLeft: 34,
+          marginTop: 15,
+          marginBottom: 2,
+        }}
+      >
+        Profile
+      </Button>
       <Drawer
         title="Basic Drawer"
         placement={placement}
@@ -67,10 +86,62 @@ const Profile = ({ bool }) => {
         onClose={onClose}
         visible={visible}
         key={placement}
+        width="660"
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <p
+          className="site-description-item-profile-p"
+          style={{ marginBottom: 24 }}
+        >
+          {user && user.name}
+        </p>
+        <p className="site-description-item-profile-p">Personal</p>
+        <Row>
+          <Col span={12}>
+            <DescriptionItem
+              title="Full Name"
+              content={`${user.name} ${user.lastName}`}
+            />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem title="Account" content={user.email} />
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            <DescriptionItem title="City" content="Buenos Aires" />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem title="Country" content="Argentina 🇦🇷" />
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            <DescriptionItem title="Birthday" content="-" />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem title="Website" content="-" />
+          </Col>
+        </Row>
+
+        <Divider />
+        <p className="site-description-item-profile-p">Contacts</p>
+        <Row>
+          <Col span={12}>
+            <DescriptionItem title="Phone Number" content="+54 ---- ----" />
+          </Col>
+        </Row>
+        <Row>
+          <Col span={24}>
+            <DescriptionItem
+              title="Github"
+              content={
+                <a href="http://github.com/ivanvera-nvm">
+                  github.com/ivanvera-nvm
+                </a>
+              }
+            />
+          </Col>
+        </Row>
       </Drawer>
     </>
   );
