@@ -22,12 +22,9 @@ import { StarOutlined } from "@ant-design/icons";
 const { Header, Content } = Layout;
 const { Title } = Typography;
 
-const Profile = ({ bool }) => {
+const Profile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user).user;
-
-  console.log("User ====>", user);
-
   const [state, setState] = useState({ visible: false, placement: "left" });
 
   const showDrawer = () => {
@@ -44,7 +41,7 @@ const Profile = ({ bool }) => {
 
   const removeFav = (imdbID) => {
     axios
-      .delete(`http://localhost:8000/api/users/${user.id}/favs`, {
+      .delete(`http://localhost:8000/api/fav/user/${user.id}`, {
         data: { imdbID },
       })
       .then((res) => {
@@ -92,7 +89,7 @@ const Profile = ({ bool }) => {
           className="site-description-item-profile-p"
           style={{ marginBottom: 24 }}
         >
-          {user && user.name}
+          {user.name}
         </p>
         <p className="site-description-item-profile-p">Personal</p>
         <Row>

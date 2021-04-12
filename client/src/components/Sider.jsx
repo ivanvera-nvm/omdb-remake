@@ -6,11 +6,11 @@ import { StarOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
 import Grid from "../components/Grid";
 import Copyright from "./Copyright";
 
-import {Link} from 'react-router-dom'
-import {clearUser} from '../state/users'
-import {useDispatch, useSelector} from 'react-redux'
+import { Link } from "react-router-dom";
+import { clearUser, fetchMe } from "../state/users";
+import { useDispatch, useSelector } from "react-redux";
 
-import Profile from '../components/Profile'
+import Profile from "../components/Profile";
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -25,30 +25,22 @@ const SidePanel = () => {
     "Mystery",
     "Romance",
   ];
-const dispatch = useDispatch()
+
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user).user;
 
   const logout = () => {
     localStorage.removeItem("token");
-    dispatch(clearUser())
-   alert('logout!')
+    dispatch(clearUser());
+    dispatch(fetchMe())
+    alert("logout!");
   };
-    
-  const user = useSelector(state => state.user)
-
-
-  console.log('ACtual user =======>' ,user)
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
         collapsible
         breakpoint="lg"
-      /*   onBreakpoint={(broken) => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-        }} */
         style={{
           display: "flex",
           overflow: "auto",
@@ -68,16 +60,22 @@ const dispatch = useDispatch()
             height: "360vh",
           }}
         >
-          <SubMenu key="sub1" icon={<UserOutlined />} title="User"
-        
-          >
-          
-            <Profile/>
-            <Menu.Item key="2"> Favorites</Menu.Item>
-            <Menu.Item key="3" danger onClick={logout}>
-              Logout
-            </Menu.Item>
-          </SubMenu>
+          {user ? (
+            <SubMenu
+              key="sub1"
+              icon={<UserOutlined />}
+              title={`${user.name} ${user.lastName}`}
+            >
+              <Profile />
+              <Menu.Item key="2">Favorites</Menu.Item>
+              <Menu.Item key="3" danger onClick={logout}>
+                Logout
+              </Menu.Item>
+            </SubMenu>
+          ) : (
+            <SubMenu key="sub0" icon={<UserOutlined />} title="User" ></SubMenu>
+          )}
+
           <SubMenu key="sub2" icon={<TeamOutlined />} title="Genre">
             {temp.map((movie, i) => (
               <Menu.Item key={i}>{movie}</Menu.Item>
@@ -89,7 +87,7 @@ const dispatch = useDispatch()
         </Menu>
       </Sider>
 
-      <Layout style={{paddingLeft: 10}}>
+      <Layout style={{ paddingLeft: 10 }}>
         <Header
           className="site-layout-sub-header-background"
           style={{ padding: 0 }}
