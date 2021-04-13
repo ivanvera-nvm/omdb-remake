@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 
+import { getFavs } from "../state/favorites";
+
 import {
   Layout,
   Menu,
@@ -25,7 +27,11 @@ const { Title } = Typography;
 const Profile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user).user;
+
   const [state, setState] = useState({ visible: false, placement: "left" });
+
+  
+ 
 
   const showDrawer = () => {
     setState({
@@ -39,20 +45,7 @@ const Profile = () => {
     });
   };
 
-  const removeFav = (imdbID) => {
-    axios
-      .delete(`http://localhost:8000/api/fav/user/${user.id}`, {
-        data: { imdbID },
-      })
-      .then((res) => {
-        return res.data;
-      })
-      .then(() => {
-        message.warning("Movie deleted !");
-      })
-
-      .catch((err) => message.error(err));
-  };
+ 
 
   const DescriptionItem = ({ title, content }) => (
     <div className="site-description-item-profile-wrapper">
@@ -69,9 +62,6 @@ const Profile = () => {
         onClick={showDrawer}
         style={{
           borderColor: "#1d1d1d",
-          marginLeft: 34,
-          marginTop: 15,
-          marginBottom: 2,
         }}
       >
         Profile
@@ -83,7 +73,7 @@ const Profile = () => {
         onClose={onClose}
         visible={visible}
         key={placement}
-        width="660"
+        width="425"
       >
         <p
           className="site-description-item-profile-p"

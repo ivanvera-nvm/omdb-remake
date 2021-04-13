@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { HeartFilled } from "@ant-design/icons";
 import { findMovies } from "../state/movies";
 import axios from "axios";
-import config from "../utils/config";
+
+import {addFavs} from '../state/favorites';
 
 const { Meta } = Card;
 const { Search } = Input;
@@ -25,26 +26,11 @@ const Grid = () => {
     setInput({ ...input, [key]: value });
   };
 
-  const handleClick = (movie) => {
-    let { Title, Year, Poster, Type, imdbID } = movie;
+  const handleClick = async (movie) => {
+    
     if (user) {
-      axios
-        .post(`http://localhost:8000/api/fav/user/${user.id}`, {
-          Title,
-          Year,
-          Poster,
-          Type,
-          imdbID,
-          owner: user.id,
-        })
-        .then((res) => {
-          console.log(res.data);
-          return res.data;
-        })
-        .then(() => message.success("Added to favorites"))
-        .catch((e) => console.log(e));
-    } else {
-      return message.error("You need to be log");
+     const favs = await dispatch(addFavs({...movie, owner: user.id}))
+      console.log('========>',favs ,'=========')
     }
   };
 
@@ -62,7 +48,7 @@ const Grid = () => {
         style={{ minWidth: "50%", width: "60%" }}
       />
       <Divider orientation="left">Top</Divider>
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} id="grid">
         {movies.Search &&
           movies.Search.map((movie, i) => (
             <Col
@@ -70,9 +56,8 @@ const Grid = () => {
               xl={8}
               sm={12}
               lg={32}
-              id={i}
               style={{ display: "flex", justifyContent: "space-between" }}
-              itemID={i}
+              key={i * 10}
             >
               <Card
                 id={i}
@@ -84,6 +69,7 @@ const Grid = () => {
                       fontSize: "1.7rem",
                       color: "#eb2f96",
                     }}
+                    key={i}
                   />
                 }
                 style={{
@@ -95,7 +81,6 @@ const Grid = () => {
                   textAlign: "center",
                   margin: 10,
                 }}
-                onMouseOver
                 cover={
                   <img
                     alt="example"
@@ -106,6 +91,8 @@ const Grid = () => {
                       margin: "auto",
                       padding: "2px",
                     }}
+                    id={movie.id}
+                    key={movie.id}
                   />
                 }
               >

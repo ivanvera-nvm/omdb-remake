@@ -11,6 +11,7 @@ import { clearUser, fetchMe } from "../state/users";
 import { useDispatch, useSelector } from "react-redux";
 
 import Profile from "../components/Profile";
+import Favorites from '../components/Favorites'
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -66,8 +67,8 @@ const SidePanel = () => {
               icon={<UserOutlined />}
               title={`${user.name} ${user.lastName}`}
             >
-              <Profile />
-              <Menu.Item key="2">Favorites</Menu.Item>
+              <Menu.Item key='1'><Profile /></Menu.Item> 
+              <Menu.Item key="2"><Favorites/></Menu.Item>
               <Menu.Item key="3" danger onClick={logout}>
                 Logout
               </Menu.Item>

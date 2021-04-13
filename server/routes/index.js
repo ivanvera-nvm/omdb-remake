@@ -7,5 +7,4 @@ const me = require('./me')
 router.use("/user", users);
 router.use("/fav", favs)
 router.use('/me', me)
-
 module.exports = router;

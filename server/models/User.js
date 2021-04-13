@@ -15,6 +15,10 @@ User.init(
     lastName: { type: S.STRING, allowNull: false },
     email: { type: S.STRING, allowNull: false, unique: true },
     password: { type: S.STRING, allowNull: false },
+    avatar: { type: S.STRING },
+    country: { type: S.STRING },
+    city: { type: S.STRING },
+    birth: { type: S.DATE },
     salt: { type: S.DataTypes.STRING },
   },
   { sequelize: db, modelName: "user" }
