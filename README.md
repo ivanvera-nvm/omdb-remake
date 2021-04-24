@@ -1,19 +1,38 @@
 # OMDB Remake
-
-In progress
 ## Front structure
+
 src
 
 ├── /components
+
 ├── /containers
+
 ├── /hooks
+
 ├── /state
+
 ├── /styles
+
 ├── /utils
+
 └── index.js
 
-### Item 2
+### Back structure
 
-### Item 3
-### Item 4
+├── /models
+
+├── /controllers
+
+├── /db
+
+├── /middleware
+
+├── /routes
+
+├── /utils
+
+└── server.config.js
+
+└── server.js
+
 
