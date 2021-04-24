@@ -3,18 +3,13 @@
 In progress
 ## Front structure
 src
+
 ├── /components
-
 ├── /containers
-
 ├── /hooks
-
 ├── /state
-
 ├── /styles
-
 ├── /utils
-
 └── index.js
 
 ### Item 2
