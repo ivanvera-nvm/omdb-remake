@@ -6,12 +6,11 @@ import { StarOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
 import Grid from "../components/Grid";
 import Copyright from "./Copyright";
 
-import { Link } from "react-router-dom";
 import { clearUser, fetchMe } from "../state/users";
 import { useDispatch, useSelector } from "react-redux";
 
 import Profile from "../components/Profile";
-import Favorites from '../components/Favorites'
+import Favorites from "../components/Favorites";
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -33,7 +32,7 @@ const SidePanel = () => {
   const logout = () => {
     localStorage.removeItem("token");
     dispatch(clearUser());
-    dispatch(fetchMe())
+    dispatch(fetchMe());
     alert("logout!");
   };
 
@@ -67,14 +66,18 @@ const SidePanel = () => {
               icon={<UserOutlined />}
               title={`${user.name} ${user.lastName}`}
             >
-              <Menu.Item key='1'><Profile /></Menu.Item> 
-              <Menu.Item key="2"><Favorites/></Menu.Item>
+              <Menu.Item key="1">
+                <Profile />
+              </Menu.Item>
+              <Menu.Item key="2">
+                <Favorites />
+              </Menu.Item>
               <Menu.Item key="3" danger onClick={logout}>
                 Logout
               </Menu.Item>
             </SubMenu>
           ) : (
-            <SubMenu key="sub0" icon={<UserOutlined />} title="User" ></SubMenu>
+            <SubMenu key="sub0" icon={<UserOutlined />} title="User"></SubMenu>
           )}
 
           <SubMenu key="sub2" icon={<TeamOutlined />} title="Genre">

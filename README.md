@@ -1,7 +1,8 @@
 # OMDB Remake
 
 In progress
-## Item 1
+## Search bar - Movies Requests
+
 ### Item 2
 
 ### Item 3

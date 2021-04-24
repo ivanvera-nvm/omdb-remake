@@ -1,24 +1,13 @@
 import React, { useState } from "react";
-import { Modal, Button, Form, Input, InputNumber } from "antd";
-
+import { Modal, Button, Form, Input } from "antd";
+import { registerRequest } from "../state/users";
+import { useDispatch } from "react-redux";
 import validateMessges from "../utils/validateMsgAntd";
 
-import {registerRequest} from '../state/users';
-import {useDispatch, useSelector} from 'react-redux'
-
 const SignUp = () => {
+  const validateMessages = validateMessges;
   const [visible, setVisible] = useState(false);
-
   const dispatch = useDispatch();
-
-  const user = useSelector (state => state.user)
-
-  console.log('user---<', user)
-
-  const handleSubmit = (values) => {
-    console.log(values);
-   dispatch(registerRequest(values)) 
-  };
 
   const layout = {
     labelCol: {
@@ -29,10 +18,10 @@ const SignUp = () => {
     },
   };
 
-
-
-
-  const validateMessages = validateMessges;
+  const handleSubmit = (values) => {
+    console.log(values);
+    dispatch(registerRequest(values));
+  };
 
   return (
     <div>
@@ -82,7 +71,7 @@ const SignUp = () => {
             rules={[
               {
                 type: "email",
-                required: true
+                required: true,
               },
             ]}
           >
@@ -93,12 +82,11 @@ const SignUp = () => {
             rules={[
               {
                 required: true,
-                
               },
             ]}
             label="Password"
           >
-            <Input.Password/>
+            <Input.Password />
           </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

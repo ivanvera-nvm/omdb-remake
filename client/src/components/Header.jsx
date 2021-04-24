@@ -1,15 +1,12 @@
 import React from "react";
-
-import { Layout, Menu, Breadcrumb } from "antd";
-import {Link} from 'react-router-dom'
+import { Layout, Menu } from "antd";
+import { Link } from "react-router-dom";
 import SignIn from "./SingIn";
 import SignUp from "./SignUp";
 
-const { SubMenu } = Menu;
-const { Header, Content, Footer, Sider } = Layout;
+const { Header } = Layout;
 
 const Appbar = () => {
-
   return (
     <div>
       <Header
@@ -34,9 +31,16 @@ const Appbar = () => {
             borderRadius: 20,
           }}
         >
-          <Menu.Item key="1" ><SignIn/></Menu.Item>
-          <Menu.Item key="2"><Link to='/' />Home</Menu.Item>
-          <Menu.Item key="3"><SignUp/></Menu.Item>
+          <Menu.Item key="1">
+            <SignIn />
+          </Menu.Item>
+          <Menu.Item key="2">
+            <Link to="/" />
+            Home
+          </Menu.Item>
+          <Menu.Item key="3">
+            <SignUp />
+          </Menu.Item>
         </Menu>
       </Header>
     </div>

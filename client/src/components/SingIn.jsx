@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button, Input, Form, Layout } from "antd";
+import { Modal, Button, Input, Form } from "antd";
 
 import validateMessages from "../utils/validateMsgAntd";
 
@@ -7,7 +7,6 @@ import { fetchMe, loginRequest } from "../state/users";
 import { useDispatch } from "react-redux";
 
 const SingIn = () => {
-    
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
 
@@ -44,6 +43,7 @@ const SingIn = () => {
             name="nest-messages"
             onFinish={onFinish}
             validateMessages={validateMessages}
+            
           >
             <Form.Item
               name={["user", "email"]}
@@ -54,6 +54,7 @@ const SingIn = () => {
                   required: true,
                 },
               ]}
+              id='user-email'
             >
               <Input />
             </Form.Item>

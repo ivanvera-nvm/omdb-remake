@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Drawer, Button, Row, Col, Typography, message } from "antd";
+import { Drawer, Button, Row, Col, Typography, Spin, message } from "antd";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -26,14 +26,12 @@ const Favorites = () => {
     dispatch(getFavs(user.id));
   }, []);
 
-  console.log("---<", favorites, "====");
-
   const handleClick = (imdbID, userId) => {
     const data = { imdbID, userId };
 
     dispatch(removeFavs(data))
       .then((res) => message.success("Movie deleted from favorites"))
-      .then(res=> dispatch(getFavs(userId)))
+      .then((res) => dispatch(getFavs(userId)))
       .catch((err) => message.error("An error has occurred"));
   };
 
@@ -48,7 +46,7 @@ const Favorites = () => {
         Favorites
       </Button>
       <Drawer
-        title="Basic Drawer"
+        title="Favorites"
         placement="bottom"
         closable={false}
         onClose={onClose}
@@ -56,15 +54,33 @@ const Favorites = () => {
         height="600"
         style={{ textAlign: "center" }}
       >
-        <Row>
-          {favorites &&
+        <Row
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignContent: "center",
+          }}
+        >
+          {!favorites ? (
+            <Spin spinning="true" size="large" />
+          ) : (
             favorites.map((movie) => {
               return (
-                <Col xs={6} xl={4} sm={6} lg={4} md={4} style={{ margin: 7 }}>
+                <Col
+                  xs={10}
+                  sm={6}
+                  md={6}
+                  lg={3}
+                  xl={3}
+                  style={{ margin: 7 }}
+                  key={movie.id}
+                >
                   <img
                     src={movie.Poster}
                     alt="posters"
-                    style={{ width: 100, marginBottom: 10, borderRadius: 10 }}
+                    style={{ width: 100, marginBottom: 15, borderRadius: 10 }}
+                    key={movie.id}
                   />
                   <Title level={5}>
                     {movie.Title}
@@ -73,7 +89,8 @@ const Favorites = () => {
                         onClick={() => handleClick(movie.imdbID, movie.owner)}
                         type="primary"
                         danger
-                        style={{ width: 90 }}
+                        style={{ width: 90, marginTop: 20 }}
+                        key={movie.imdbID}
                       >
                         Remove
                       </Button>
@@ -81,7 +98,8 @@ const Favorites = () => {
                   </Title>
                 </Col>
               );
-            })}
+            })
+          )}
         </Row>
       </Drawer>
     </>

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Divider, Input, Card, message } from "antd";
+import { Row, Col, Divider, Input, Card } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { HeartFilled } from "@ant-design/icons";
 import { findMovies } from "../state/movies";
-import axios from "axios";
 
-import {addFavs} from '../state/favorites';
+import { addFavs } from "../state/favorites";
 
 const { Meta } = Card;
 const { Search } = Input;
@@ -27,16 +26,14 @@ const Grid = () => {
   };
 
   const handleClick = async (movie) => {
-    
     if (user) {
-     const favs = await dispatch(addFavs({...movie, owner: user.id}))
-      console.log('========>',favs ,'=========')
+      dispatch(addFavs({ ...movie, owner: user.id }));
     }
   };
 
   useEffect(() => {
     dispatch(findMovies(input.search || "the thing"));
-  }, [input]);
+  }, [input, dispatch]);
 
   return (
     <div style={{ textAlign: "center" }}>
