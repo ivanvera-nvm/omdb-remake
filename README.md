@@ -1,8 +1,15 @@
 # OMDB Remake
 
 In progress
-## Search bar - Movies Requests
-
+## Front structure
+src
+├── /components
+├── /containers
+├── /hooks
+├── /state
+├── /styles
+├── /utils
+└── index.js
 ### Item 2
 
 ### Item 3
